@@ -1,7 +1,20 @@
+<p align="center"><img src="assets/llmgd-stacked.svg" width="140" alt="LLMGD badge"></p>
+
 # LLMGD — Large Language Model Governance Disclosure
 
 A Creative-Commons-style label that says, honestly and verifiably, how much
 LLM involvement a piece of work contains.
+
+<p><img src="assets/llmgd-level-0.svg" width="44" alt="LLMGD-0">
+<img src="assets/llmgd-level-1.svg" width="44" alt="LLMGD-1">
+<img src="assets/llmgd-level-2.svg" width="44" alt="LLMGD-2">
+<img src="assets/llmgd-level-3.svg" width="44" alt="LLMGD-3">
+<img src="assets/llmgd-level-4.svg" width="44" alt="LLMGD-4">
+<img src="assets/llmgd-level-5.svg" width="44" alt="LLMGD-5"></p>
+
+The mark is the standard: the L-shaped axis is the Origin and Assurance
+grid, and the dot plots where the work sits on it. Level badges walk the
+dot up the diagonal.
 
 ## Why
 
@@ -57,10 +70,22 @@ Disclosure: LLMGD-2 (human concept and constraints, LLM-designed detail and text
 LLMGD: v0.1; origin=O1; assurance=R,U; scope=docs; graded-by=claude-fable-5; retrieval=author-side
 ```
 
+## Assets
+
+The badge family in [assets/](assets/) (mark, level badges 0-5, flag chips
+R/U/T/X, inline and stacked lockups, black/white variants) is CC0. The
+assets carry their own self-graded label in
+[assets/DECLARATION.md](assets/DECLARATION.md), the first field verdict
+ever produced by the grading prompt. It was run before the standard was
+even published, it grades against the author's interest where the evidence
+says so, and it flags its own conflict of interest. Read it to see what an
+honest verdict looks like.
+
 ## Licensing
 
 Specification and documentation: CC BY-SA 4.0.
-The grading prompt: CC0, so it can be embedded anywhere without friction.
+The grading prompt and all assets: CC0, so they can be embedded anywhere
+without friction.
 
 ## Status
 

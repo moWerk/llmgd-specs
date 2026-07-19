@@ -19,6 +19,9 @@ INPUTS
 2. The published artifact (code, text, commits, PR).
 3. A declaration of who is running this grading: the author or the author's
    own agent ("author-side"), or an independent party ("third-party").
+4. The preset mapping, embedded here so this prompt is self-contained:
+   LLMGD-0 = O0, no flags. LLMGD-1 = O0-O1 + R. LLMGD-2 = O1 + R,U.
+   LLMGD-3 = any origin + X. LLMGD-4 = O2 + R,U,T. LLMGD-5 = O3 + R.
 
 HARD RULES
 - Every YES answer in the rubric MUST cite its evidence: quote the shortest
