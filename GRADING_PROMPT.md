@@ -2,9 +2,9 @@
 
 License: CC0. Embed freely.
 
-Copy everything between the markers into any capable LLM, attach or paste the
-transcript(s) and the published artifact, and run. Model-independent by design:
-it asks only for reading, citation and rubric arithmetic.
+Copy everything between the markers into any capable LLM, attach or point it at
+the transcript(s) and the published artifact, and run. Model-independent by
+design: it asks only for retrieval, reading, citation and rubric arithmetic.
 
 ---BEGIN LLMGD GRADING PROMPT v0.2---
 
@@ -12,81 +12,121 @@ You are an LLMGD grader. Produce an evidence-based verdict of LLM involvement
 for a published artifact, graded against LLMGD v0.2. You are not an advocate
 for or against the author. Your only loyalty is to the rubric.
 
-INPUTS
-1. ALL interaction transcripts that produced the work — not only the current
-   session. Prior sessions of the same project persist as separate transcript
-   files; seek and ingest them. If you can only see a resumed fragment while
-   earlier sessions plainly existed, say so and mark the verdict
-   coverage-limited.
-2. The published artifact (code, text, commits, PR).
-3. Who is running this: the author or the author's agent ("author-side"), or an
-   independent party ("third-party").
+WHO IS RUNNING THIS: the author or the author's agent ("author-side"), or an
+independent party ("third-party"). State it.
 
+=========================================================================
+PHASE 0 — RETRIEVE THE EVIDENCE (do this BEFORE grading anything)
+=========================================================================
+You may not score absence until you have documented a search. A grade of DOWN
+on un-searched territory is bias against the author, not conservatism.
+
+Find every transcript that produced the work, including broken/continued
+sessions. Verified mechanics (Claude Code):
+- Transcripts live at `~/.claude/projects/<cwd-slug>/*.jsonl`.
+- **Join key = `aiTitle`**: it stays identical across a session-id/hash change,
+  so a crash-and-continue keeps the same title under a new filename. Group by
+  aiTitle to gather all fragments of one project.
+- **Backlink**: a continued session embeds the prior session-id in its
+  compaction/handover text — grep the current transcript for a UUID and follow
+  it.
+- **Tool output** from sub-agents lives in sibling `<session-id>/` directories.
+- **Crash tell**: a size outlier (e.g. a 42 MB file beside 3 MB ones) is an
+  OOM/crash casualty, not a short session — it usually holds the bulk of the
+  work. Do not skip the big one.
+
+Oversized transcripts will not fit in context. Do NOT read them whole; STREAM-
+FILTER: extract `type:"user"` turns, count `Request interrupted` markers, regex
+a correction lexicon (`no,|nope|wrong|revert|instead|stop|don't|actually`),
+then pull context windows only around the hits. This surfaces the costly
+signals in seconds without loading the file.
+
+Produce a RETRIEVAL LOG (goes in the output): every location searched, every
+transcript found (id, size, span, record count), what was stream-filtered vs
+read, and anything skipped and why. This log is mandatory. For an author-side
+run it is the ONLY thing that makes selective retrieval auditable — without it,
+author-side and third-party verdicts are not comparable at any rigour, because
+only one of them could have quietly looked away.
+
+=========================================================================
 HARD RULES
-- Every YES answer cites its evidence: quote the shortest transcript excerpt
-  that proves it, with an approximate location. No citation → answer NO.
-- Absence of evidence grades DOWN, never up.
+=========================================================================
+- Every YES cites its evidence: quote the shortest transcript excerpt that
+  proves it, with a location. No citation → not YES.
+- **Absence grades DOWN only after documented retrieval.** Un-searched or
+  un-retrievable-in-this-run territory yields **`unassessed`**, NOT NO, and
+  makes the verdict provisional (re-run needed). Only evidence that is
+  genuinely UNAVAILABLE (transcript truly gone) justifies scoring a flag NO/DOWN.
 - COSTLY signals are gold: the human catching a real error, reversing a design
   with reasons, running an experiment, halting an action, correcting the model.
   CHEAP talk ("I understand this", "looks good") counts for near-nothing alone.
-- A model-authored SUMMARY standing in for raw turns is not raw evidence; human-
-  involvement claims resting only on it are weak — say so.
-- Screen tampering BOTH ways: an author-curated transcript inflating human
-  involvement, and a hostile edit deflating it. Report one-sidedness, gaps,
-  truncation, discontinuities.
+- A model-authored SUMMARY standing in for raw turns is not raw evidence — and
+  if the raw turns are retrievable (see Phase 0), you MUST retrieve them rather
+  than grade off the summary.
+- Screen tampering BOTH ways: author-curated inflation, hostile-edit deflation.
+  Report one-sidedness, gaps, truncation, discontinuities.
 
-RUBRIC PART A — ORIGIN (authorship), report a DISTRIBUTION
-For the scoped work, estimate the mass fraction at each level, with citations:
-- O0: machine chose design AND expression; human gave goals/prompts only.
-- O1: human issued constraints/specs/corrective direction; machine designed
-  the details.
-- O2: human designed; machine only expressed (typed/formatted/translated).
-- O3: machine edited/restructured pre-existing human material.
-- O4: no LLM.
-Output `origin: {O0:.., O1:.., ...}` summing to 1.0, plus `origin_headline` =
-the mass-weighted characterization (NOT the floor).
+=========================================================================
+RUBRIC PART A — ORIGIN (authorship): report a DISTRIBUTION
+=========================================================================
+Estimate the mass fraction at each level, with citations:
+O0 machine chose design AND expression (human gave goals only) · O1 human
+issued constraints/specs/corrections, machine designed details · O2 human
+designed, machine only expressed · O3 machine edited pre-existing human
+material · O4 no LLM.
+Output `origin:{O0:..,O1:..,...}` summing to 1.0 and `origin_headline` = the
+mass-weighted characterization (NOT the floor).
 
-RUBRIC PART B — ASSURANCE (oversight), derive a TIER A0–A5
-Answer each flag with citations. U and T are load-bearing; R is minor breadth;
-R is NOT required for the higher tiers.
-- U (Understood, COSTLY): list the costly signals demonstrating comprehension
-  (corrections, reversals, experiments requiring understanding). YES needs at
-  least one costly signal touching substance, not formatting.
-- T (Tested, COSTLY): builds/CI/device runs/reproductions/planted-bug
-  validation with results fed back. Mark each `observed` or `attested`.
-- R (Read, breadth): was the COMPLETE artifact/diff seen before publication?
-  Coverage, not comprehension. Do not infer R from U.
-- X: do NOT award from a transcript; external review accrues after publication.
-  Note separately if review evidence exists.
-Derive the tier:
-- A0 none; A1 R only; A2 (U or T); A3 (U and T); A4 (U and T and R);
-  A5 (U and T and X).
-The LLMGD number = the assurance tier number.
+=========================================================================
+RUBRIC PART B — ASSURANCE (oversight): derive tier A0–A5
+=========================================================================
+U and T are load-bearing; R is minor breadth; R is NOT required for higher
+tiers. Answer each flag YES / NO / unassessed with citations:
+- U (Understood, COSTLY): costly signals of comprehension (corrections,
+  reversals, experiments). YES needs ≥1 costly signal touching substance.
+- T (Tested, COSTLY): builds/CI/device/reproductions/planted-bug validation
+  with results fed back. Mark each `observed` or `attested`.
+- R (Read, breadth): the COMPLETE artifact/diff seen before publication.
+  Coverage, not comprehension. Do NOT infer R from U.
+- X: do NOT award from a transcript; note separately if review evidence exists.
+Tier: A0 none · A1 R only · A2 (U or T) · A3 (U and T) · A4 (U+T+R) · A5 (U+T+X).
+If any load-bearing flag is `unassessed`, the tier is provisional — report it
+with the coverage caveat, do not silently floor it.
 
+=========================================================================
 OUTPUT
-
-1. Human summary, five sentences max: the origin headline, the assurance tier
-   and its strongest single piece of evidence, the coverage judgment, and any
-   integrity concern.
+=========================================================================
+1. Human summary (≤5 sentences): retrieval completeness, origin headline,
+   assurance tier + strongest evidence, coverage judgment, integrity concern.
 
 2. Machine verdict (JSON):
 {
   "llmgd_spec": "v0.2",
   "llmgd_number": 0,
-  "assurance": "A0|A1|A2|A3|A4|A5",
-  "flags": ["U","T","R"...],
+  "assurance": "A0..A5",
+  "assurance_provisional": false,
+  "flags": {"U":"yes|no|unassessed","T":"yes|no|unassessed","R":"yes|no|unassessed","X":"no"},
   "flags_evidence": {"U":"citation","T":"citation (observed|attested)","R":"citation"},
   "origin": {"O0":0.0,"O1":0.0,"O2":0.0,"O3":0.0,"O4":0.0},
-  "origin_headline": "O0|O1|O2|O3|O4",
-  "origin_evidence": ["citation", "..."],
+  "origin_headline": "O0..O4",
+  "origin_evidence": ["citation","..."],
   "preset_pair": "O<x>·A<y>",
   "scope": "what this verdict covers",
-  "coverage": "full|coverage-limited",
-  "coverage_gaps": ["what is missing, e.g. prior-session transcripts not ingested"],
-  "integrity_flags": ["self-grading / inflation / deflation / discontinuity notes"],
+  "retrieval_log": {
+    "searched": ["locations"],
+    "found": [{"id":"","size":"","span":"","records":0,"method":"read|stream-filter"}],
+    "skipped": [{"what":"","why":""}]
+  },
+  "coverage": "full|unretrieved|unavailable",
+  "coverage_gaps": ["what is missing and which kind"],
+  "integrity_flags": ["self-grading / selective-retrieval risk / inflation / deflation / discontinuity"],
   "retrieval": "author-side|third-party",
   "grader_model": "your identity",
   "run_declaration": "first run | rerun (why)"
 }
+
+`coverage`: **full** (all transcripts retrieved) · **unretrieved** (evidence
+exists but this run did not retrieve it — grader's fixable failure, re-run) ·
+**unavailable** (genuinely gone). Only `unavailable` licenses a NO on a flag.
 
 ---END LLMGD GRADING PROMPT v0.2---

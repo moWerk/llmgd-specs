@@ -150,19 +150,31 @@ LLMGD: v0.2; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headlin
 
 ## 8. Grading protocol
 
-1. Inputs: **all** interaction transcript(s) that produced the work, plus the
-   published artifact. Prior sessions of the same project persist as separate
-   transcript files; the grader MUST seek and ingest them, not grade only the
-   current session — grading a resumed fragment while sibling transcripts exist
-   understates coverage and MUST be reported as coverage-limited.
-2. Run the standardized rubric (GRADING_PROMPT.md): binary evidence questions,
-   each answered with a transcript citation or answered NO.
-3. Unprovable claims grade DOWN. Missing transcript coverage grades DOWN and is
-   reported.
-4. The verdict includes: origin distribution + headline, assurance tier with
-   its flags and evidence citations, coverage estimate, integrity caveats,
+1. **Retrieve before grading.** Find every transcript that produced the work,
+   *including broken/continued sessions*. They persist as separate files under
+   `~/.claude/projects/<slug>/`. The join key `aiTitle` survives a crash-and-
+   continue session-id change; a continued session backlinks the prior
+   session-id in its handover; a size-outlier file (e.g. 42 MB beside 3 MB
+   ones) is a crash casualty that usually holds the bulk of the work. Oversized
+   transcripts are stream-filtered, never read whole (GRADING_PROMPT.md gives
+   the mechanics). Produce a **retrieval log**: searched / found / skipped-and-
+   why.
+2. **Absence is gated on retrieval.** A flag scores NO (DOWN) only when its
+   evidence is genuinely **unavailable** after a documented search. Un-searched
+   or not-retrieved-this-run territory yields **`unassessed`**, not NO, and
+   makes the verdict provisional. Scoring missing-because-unretrieved as absent
+   is bias against the author, not conservatism — it was the worst failure of
+   both v0.1 and the first field grading, and it landed hardest on R, the
+   former gate.
+3. **Coverage has three states**, not two: `full` (all transcripts retrieved),
+   `unretrieved` (evidence exists, this run missed it — fixable, re-run), and
+   `unavailable` (truly gone). Only `unavailable` licenses a DOWN.
+4. Run the rubric: origin distribution (§2), assurance tier from the costly-
+   signal-led flags (§3), each answer cited or marked `unassessed`.
+5. The verdict includes: retrieval log, origin distribution + headline,
+   assurance tier with flags and evidence, coverage state, integrity caveats,
    grader identity, retrieval mode.
-5. The FIRST verdict SHOULD be the published one; re-running for a better score
+6. The FIRST verdict SHOULD be the published one; re-running for a better score
    ("verdict shopping") defeats the standard. Include a run declaration.
 
 ## 9. Integrity considerations
@@ -177,6 +189,15 @@ Screen both directions:
   transcript. Mitigation: report coverage, continuity, truncation and
   discontinuity anomalies; mark incomplete-transcript verdicts `coverage-
   limited`, naming what is missing.
+
+- **Selective retrieval — the author-side hull leak.** A grader with
+  filesystem access does not merely fail to retrieve; it *chooses* what to
+  retrieve, and selective retrieval is invisible in a verdict that reports only
+  what it looked at. The mandatory retrieval log (§8) is what makes it
+  auditable. Without it, author-side and third-party runs are not comparable
+  even at identical rigour, because only one of them could have quietly looked
+  away. The real self-grading danger is not generosity — it is grading a
+  *convenient subset* and reporting it with full confidence.
 
 **Self-grading** (author-side, same model that produced the work) carries a
 structural conflict of interest in both directions and MUST be flagged; a
@@ -208,7 +229,15 @@ minor breadth signal, no longer a gate. (b) Grade split into two coordinates,
 Origin (authorship) · Assurance (oversight); the LLMGD-N number now tracks the
 assurance tier, with origin as a required companion tag. (c) Origin reported as
 a distribution for composite works, not collapsed to the weakest part. (d)
-Graders MUST ingest all project transcripts, not only the current session.
+**Retrieval-first grading** — the deeper fix, surfaced by the first field
+grading (an author-side self-grade whose grader scored 93% of the project as
+"absence" while the raw turns sat on disk): graders MUST retrieve all project
+transcripts including crashed/continued sessions before scoring; absence is
+gated on documented retrieval (`unassessed`, not NO, for un-searched
+territory); coverage splits into full / unretrieved / unavailable; and a
+retrieval log makes selective retrieval auditable. Both the axis redesign and
+this retrieval model were contributed by the field-grading process itself —
+the standard's own subjects improving the standard.
 
 **v0.1 labels remain valid as v0.1.** They cite their version and their
 grammar is unchanged; do not retro-grade them. New grading uses v0.2.
