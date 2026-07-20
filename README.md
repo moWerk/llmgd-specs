@@ -61,6 +61,22 @@ LLMGD: v0.1; origin=O2; assurance=R,U,T; scope=code+messages; graded-by=<model>;
 Then, ideally, publish the graded verdict or keep the transcript retrievable
 for third-party grading. That is the whole standard.
 
+### Embedding the badges
+
+For a nicer label, embed the badge assets instead of plain text. The
+reusable two-line pattern, with the inline lockup linking back to this
+spec, the level badge, and the awarded flag chips:
+
+```html
+<p>
+<a href="https://github.com/moWerk/llmgd-specs"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="26" alt="level 2">&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="22" alt="R"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="22" alt="U"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-T.svg" height="22" alt="T">&ensp;human-designed and ruled, LLM-implemented; read, understood, device-tested<br>
+<sub><code>LLMGD: v0.1; origin=O1; assurance=R,U,T; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
+</p>
+```
+
+Swap the level badge and flag chips for your verdict's values; the
+machine-readable line always carries the exact coordinates.
+
 ## This repository's own label
 
 Dogfood starts at home:
