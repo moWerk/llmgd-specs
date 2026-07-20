@@ -64,17 +64,17 @@ for third-party grading. That is the whole standard.
 ### Embedding the badges
 
 For a nicer label, embed the badge assets instead of plain text. The
-reusable two-line pattern: line one carries the inline lockup linking
-back to this spec, the level badge and the human phrase; line two leads
-with the awarded flag chips and the machine-readable string, so lockup
-and chips stack visually. The wordmark uses a picture element so both
+reusable two-line pattern: line one carries only the inline lockup
+linking back to this spec, plus the human phrase, so the one real link
+cannot be confused with badges. Line two leads with the level badge and
+the awarded flag chips, then the machine-readable string. The wordmark uses a picture element so both
 GitHub themes render it correctly (the `-white` asset variants carry
 white text for dark backgrounds):
 
 ```html
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="26" alt="level 2">&ensp;human-designed and ruled, LLM-implemented; read, understood, device-tested<br>
-<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="20" alt="R"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-T.svg" height="20" alt="T">&ensp;<sub><code>LLMGD: v0.1; origin=O1; assurance=R,U,T; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;human-designed and ruled, LLM-implemented; read, understood, device-tested<br>
+<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="20" alt="level 2"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="20" alt="R"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-T.svg" height="20" alt="T">&ensp;<sub><code>LLMGD: v0.1; origin=O1; assurance=R,U,T; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
 </p>
 ```
 
@@ -84,8 +84,8 @@ machine-readable line always carries the exact coordinates.
 Rendered, this repository's own label:
 
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="26" alt="level 2">&ensp;human concept and constraints, LLM-designed detail and text; read, understood<br>
-<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="20" alt="R"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U">&ensp;<sub><code>LLMGD: v0.1; origin=O1; assurance=R,U; scope=docs+assets; graded-by=claude-fable-5; retrieval=author-side</code></sub>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;human concept and constraints, LLM-designed detail and text; read, understood<br>
+<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="20" alt="level 2"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="20" alt="R"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U">&ensp;<sub><code>LLMGD: v0.1; origin=O1; assurance=R,U; scope=docs+assets; graded-by=claude-fable-5; retrieval=author-side</code></sub>
 </p>
 
 ## This repository's own label
