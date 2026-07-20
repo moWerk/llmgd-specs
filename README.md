@@ -1,20 +1,24 @@
-<p align="center"><img src="assets/llmgd-stacked.svg" width="140" alt="LLMGD badge"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/llmgd-signal-lockup-3-dark.svg"><img src="assets/llmgd-signal-lockup-3.svg" height="44" alt="LLMGD-3 badge"></picture></p>
 
 # LLMGD — Large Language Model Governance Disclosure
 
 A Creative-Commons-style label that says, honestly and verifiably, how much
 LLM involvement a piece of work contains.
 
-<p><img src="assets/llmgd-level-0.svg" width="44" alt="LLMGD-0">
-<img src="assets/llmgd-level-1.svg" width="44" alt="LLMGD-1">
-<img src="assets/llmgd-level-2.svg" width="44" alt="LLMGD-2">
-<img src="assets/llmgd-level-3.svg" width="44" alt="LLMGD-3">
-<img src="assets/llmgd-level-4.svg" width="44" alt="LLMGD-4">
-<img src="assets/llmgd-level-5.svg" width="44" alt="LLMGD-5"></p>
+**Origin** — the authorship split, from all-machine to all-human:
 
-The mark is the standard: the L-shaped axis is the Origin and Assurance
-grid, and the dot plots where the work sits on it. Level badges walk the
-dot up the diagonal.
+<p>
+<img src="assets/llmgd-signal-o0.svg" height="40" alt="O0 all machine">
+<img src="assets/llmgd-signal-o1.svg" height="40" alt="O1 mostly machine">
+<img src="assets/llmgd-signal-o2.svg" height="40" alt="O2 half and half">
+<img src="assets/llmgd-signal-o3.svg" height="40" alt="O3 mostly human">
+<img src="assets/llmgd-signal-o4.svg" height="40" alt="O4 all human">
+</p>
+
+The mark reads itself: a smooth **analog wave** is the human side, a stepped
+**digital wave** is the machine, and the split sits at the authorship
+proportion. The **LLMGD-N** number is the second axis — the assurance tier,
+how well a human governed the work.
 
 ## Why
 
@@ -69,28 +73,29 @@ for third-party grading. That is the whole standard.
 ### Embedding the badges
 
 For a nicer label, embed the badge assets instead of plain text. The
-reusable two-line pattern: line one carries only the inline lockup
-linking back to this spec, plus the human phrase, so the one real link
-cannot be confused with badges. Line two leads with the level badge and
-the awarded flag chips, then the machine-readable string. The wordmark uses a picture element so both
-GitHub themes render it correctly (the `-white` asset variants carry
-white text for dark backgrounds):
+reusable two-line pattern: line one carries the **assurance-tier lockup**
+(linking to this spec) and the **origin mark** for your split, plus the
+human phrase; line two is the machine-readable string. The lockup uses a
+picture element so both GitHub themes render it (the `-dark` variants carry
+light text for dark backgrounds; the origin marks are colour-only and
+theme-safe):
 
 ```html
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;origin O1 · machine-authored, human-understood and device-tested<br>
-<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-3.svg" height="20" alt="LLMGD-3"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-T.svg" height="20" alt="T">&ensp;<sub><code>LLMGD: v0.2; assurance=A3; flags=U,T; origin_headline=O1; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3.svg" height="30" alt="LLMGD-3"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · machine-authored, human-understood and device-tested<br>
+<sub><code>LLMGD: v0.2; assurance=A3; flags=U,T; origin_headline=O1; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
 </p>
 ```
 
-Swap the level badge and flag chips for your verdict's values; the
+Swap the lockup number (`-0`…`-5`, your assurance tier) and the origin
+mark (`-o0`…`-o4`, your authorship split) for your verdict's values; the
 machine-readable line always carries the exact coordinates.
 
 Rendered, this repository's own label:
 
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline-white.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-inline.svg" height="26" alt="LLMGD"></picture></a>&ensp;origin O1 · human concept and rulings, LLM-designed detail and text; understood, read<br>
-<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-level-2.svg" height="20" alt="LLMGD-2"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-U.svg" height="20" alt="U"> <img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-flag-R.svg" height="20" alt="R">&ensp;<sub><code>LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs+assets; graded-by=claude-fable-5; retrieval=author-side</code></sub>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2.svg" height="30" alt="LLMGD-2"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · human concept and rulings, LLM-designed detail and text; understood, read<br>
+<sub><code>LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs+assets; graded-by=claude-fable-5; retrieval=author-side</code></sub>
 </p>
 
 ## This repository's own label
@@ -105,14 +110,17 @@ LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs; graded-by=
 
 ## Assets
 
-The badge family in [assets/](assets/) (mark, level badges 0-5, flag chips
-R/U/T/X, inline and stacked lockups, black/white variants) is CC0. The
-assets carry their own self-graded label in
-[assets/DECLARATION.md](assets/DECLARATION.md), the first field verdict
-ever produced by the grading prompt. It was run before the standard was
-even published, it grades against the author's interest where the evidence
-says so, and it flags its own conflict of interest. Read it to see what an
-honest verdict looks like.
+The **signal** badge family in [assets/](assets/) is CC0: origin marks
+`signal-o0…o4` (the analog↔digital authorship split), assurance-tier
+lockups `signal-lockup-0…5`, and the wordmark, each with dark and pure
+black/white variants. The analog wave is the human hand, the square wave
+the machine; the split shows the proportion.
+
+For a worked verdict — the case that shaped v0.2 — see [SPEC.md §10](SPEC.md).
+[assets/DECLARATION.md](assets/DECLARATION.md) is kept as history: the
+first field verdict the grading prompt ever produced (a v0.1 self-grade of
+the original badge round), notable because it grades against the author's
+interest and flags its own conflict of interest.
 
 ## Licensing
 
