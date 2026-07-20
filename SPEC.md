@@ -56,6 +56,16 @@ origin: {O0: 0.30, O1: 0.20, O2: 0.50}; origin_headline: O1
 
 Atomic works may report a single level: `origin: O2`.
 
+**O0-vs-O1 boundary test.** This boundary now carries the judgment weight, so
+apply a fixed test: does the human utterance *name the design* (→ O1, or O2 if
+it also specifies the expression) or *feed a decision the machine then makes*
+(→ O0)? "Shift it to the service", a dictated command set, "commit scoped by
+theme" name the design. "It crashes", "the VAI doesn't cut power", "implement
+what you think is safe" feed a fact, goal or correction the machine designs
+around. When O0 and O1 mass land near-even, the grader MUST report the
+sensitivity and which way a stricter reading tips the headline, not present a
+coin-flip as settled.
+
 ## 3. Axis two — ASSURANCE (oversight): A0–A5
 
 Assurance grades how strongly a human governed the work before publication.
@@ -91,6 +101,14 @@ neither.
 A3 — heavily machine-authored but genuinely understood and tested — is the
 responsible heavy-LLM-use state, and it is a *respectable* grade. v0.1 could
 not represent it; v0.2 makes it central.
+
+**R for machine-authored code.** When origin is low, a human rarely governs by
+reading the whole diff — reading 40k machine-written lines is not how a
+maintainer of such work exercises control; U and T are. So `R: NO` on
+high-machine-origin work is the *expected, honest* state, not a deficiency, and
+A3 is its natural ceiling short of external review. A4 asks for a breadth-review
+that this way of working simply does not use; that is a description, not a
+demerit.
 
 ## 4. Evidence taxonomy
 
@@ -153,9 +171,12 @@ LLMGD: v0.2; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headlin
 1. **Retrieve before grading.** Find every transcript that produced the work,
    *including broken/continued sessions*. They persist as separate files under
    `~/.claude/projects/<slug>/`. The join key `aiTitle` survives a crash-and-
-   continue session-id change; a continued session backlinks the prior
-   session-id in its handover; a size-outlier file (e.g. 42 MB beside 3 MB
-   ones) is a crash casualty that usually holds the bulk of the work. Oversized
+   continue session-id change — but only join within one project directory: the
+   same title can recur under a different cwd-slug for an unrelated project, so
+   a cross-directory aiTitle match is a candidate to confirm by content, not an
+   automatic include. A continued session backlinks the prior session-id in its
+   handover; a size-outlier file (e.g. 42 MB beside 3 MB ones) is a crash
+   casualty that usually holds the bulk of the work. Oversized
    transcripts are stream-filtered, never read whole (GRADING_PROMPT.md gives
    the mechanics). Produce a **retrieval log**: searched / found / skipped-and-
    why.
@@ -197,7 +218,12 @@ Screen both directions:
   auditable. Without it, author-side and third-party runs are not comparable
   even at identical rigour, because only one of them could have quietly looked
   away. The real self-grading danger is not generosity — it is grading a
-  *convenient subset* and reporting it with full confidence.
+  *convenient subset* and reporting it with full confidence. The retrieval log
+  makes *what was searched* auditable but not *what the grader chose to search
+  for*; a narrower lexicon yields a cleaner-looking log and a different result.
+  So the search lexicons are FIXED in GRADING_PROMPT.md, not left to grader
+  discretion — a grader MUST run the standard set. Discretion in what to look
+  for is the last place selective retrieval can hide.
 
 **Self-grading** (author-side, same model that produced the work) carries a
 structural conflict of interest in both directions and MUST be flagged; a
@@ -205,20 +231,31 @@ third-party rerun is recommended before relying on it. Transcript custody: a
 verdict is only as trustworthy as transcript custody; authors SHOULD archive
 session logs immutably at publication.
 
-## 10. Worked example (the case that motivated v0.2)
+## 10. Worked example — the real field grading that shaped v0.2
 
-A long software session, heavily machine-authored, where the human (a) issued
-domain rulings and command sets [origin O2 in parts, O1/O0 in others], (b)
-refuted a fabricated power budget with a day-long hardware observation and
-corrected his own instrument reading [**U**, costly], and (c) had a 226-test
-suite with planted-bug validation run throughout [**T**, observed]. No
-complete-diff review ceremony occurred [no **R**]; external review was pending
-[no **X**].
+A long, heavily machine-authored software project (a fleet manager, releases
+0.1–0.8), graded author-side by the producing model.
 
-- v0.1 verdict: `O0`, flags `U,T`, **preset: none** — the work fell out of the
-  scheme for want of R. The floor, despite deep, evidenced human oversight.
-- v0.2 verdict: **`LLMGD-3 · origin O1`** — A3 (understood and tested), with an
-  origin distribution showing the human-directed mass. Honest, and respectable.
+- **v0.1 verdict:** `O0`, flags `U,T`, **preset: none** — floored. And the
+  grader had searched only 3.4 MB of ~51 MB of transcript, scoring the
+  unretrieved 93% as absence; its `R: NO` was assumed, not searched.
+- **v0.2 re-grade, retrieval-first:** the `aiTitle` join surfaced a 43.9 MB
+  OOM-crashed session (18,047 records, 3,723 user turns) that v0.1 never read —
+  4,363 user turns in scope against ~340 before. Verdict: **`LLMGD-3 · origin
+  O1`**. Assurance **A3** — U (independent crash reproduction *before* asserting
+  a claim; a power-budget refuted by a day-long hardware observation; the
+  author correcting his own instrument reading) and T (a 226-test suite with
+  planted-bug validation, including a self-caught decoration failure). R is now
+  a *searched* NO: across 4,363 turns only 7 touch code at all, and the 44
+  `git diff` runs were the assistant's own grep-filtered verification, never a
+  diff shown to the human — the expected, honest state for machine-authored
+  code, and A3 is its natural ceiling. Origin is a near-even distribution
+  `{O0:.45, O1:.45, O2:.10}`, headline O1, with the boundary sensitivity
+  reported rather than hidden.
+
+The revision was authored *by* this grading: the axis split, the U/T inversion,
+and the whole retrieval-first model came out of the run's own diagnosis of why
+its first verdict was wrong.
 
 ## 11. Versioning and changelog
 

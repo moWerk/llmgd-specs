@@ -24,9 +24,13 @@ on un-searched territory is bias against the author, not conservatism.
 Find every transcript that produced the work, including broken/continued
 sessions. Verified mechanics (Claude Code):
 - Transcripts live at `~/.claude/projects/<cwd-slug>/*.jsonl`.
-- **Join key = `aiTitle`**: it stays identical across a session-id/hash change,
-  so a crash-and-continue keeps the same title under a new filename. Group by
-  aiTitle to gather all fragments of one project.
+- **Join key = `aiTitle` *within the same project directory*.** aiTitle stays
+  identical across a session-id/hash change, so a crash-and-continue keeps the
+  same title under a new filename — group by aiTitle to gather fragments. But
+  aiTitle alone is NOT sufficient: the same title can appear under a *different*
+  cwd-slug for an unrelated project (field-observed). Auto-join only within one
+  project dir; treat a cross-directory aiTitle match as a *candidate* to
+  confirm by content, not an automatic include.
 - **Backlink**: a continued session embeds the prior session-id in its
   compaction/handover text — grep the current transcript for a UUID and follow
   it.
@@ -36,10 +40,19 @@ sessions. Verified mechanics (Claude Code):
   work. Do not skip the big one.
 
 Oversized transcripts will not fit in context. Do NOT read them whole; STREAM-
-FILTER: extract `type:"user"` turns, count `Request interrupted` markers, regex
-a correction lexicon (`no,|nope|wrong|revert|instead|stop|don't|actually`),
-then pull context windows only around the hits. This surfaces the costly
-signals in seconds without loading the file.
+FILTER: extract `type:"user"` turns, count `Request interrupted` markers, then
+regex the STANDARD LEXICONS below and pull context windows only around hits.
+This surfaces the costly signals in seconds without loading the file.
+
+**Standard lexicons — run these verbatim (you MAY add more, but MUST run
+these, so author-side and third-party runs are comparable and lexicon choice
+is not a hidden lever):**
+- U / correction: `no,|nope|wrong|revert|instead|stop|don't|actually|disproven|not really`
+- R / review: `i read|i reviewed|read the (diff|code)|went through|looked (at|over)|looks good|lgtm|approved`
+- code-engagement: `\.(py|qml|cpp|js|ts)|def |function |the (loop|guard|class|timer)|refactor|rename|line \d`
+Report which lexicons you ran (the standard set, plus any additions) in the
+retrieval log. A grader that narrows the patterns to shape a finding is
+performing selective retrieval; the fixed set is the floor that prevents it.
 
 Produce a RETRIEVAL LOG (goes in the output): every location searched, every
 transcript found (id, size, span, record count), what was stream-filtered vs
@@ -77,6 +90,15 @@ material · O4 no LLM.
 Output `origin:{O0:..,O1:..,...}` summing to 1.0 and `origin_headline` = the
 mass-weighted characterization (NOT the floor).
 
+**O0-vs-O1 disambiguation test** (the boundary that carries the judgment):
+does the human utterance *name the design* or *feed a decision the machine
+makes*? "Shift it to the service", "reboot bootloader / recovery / poweroff"
+(a command set), "commit them scoped by theme" — these *name* the design → O1
+(or O2). "It crashes", "the VAI doesn't cut power", "see what you can safely
+implement" — these supply a fact, goal or correction the machine then designs
+around → O0. When O0 and O1 mass land near-even, SAY SO and state which way a
+stricter reading would tip the headline; do not present a coin-flip as settled.
+
 =========================================================================
 RUBRIC PART B — ASSURANCE (oversight): derive tier A0–A5
 =========================================================================
@@ -92,6 +114,13 @@ tiers. Answer each flag YES / NO / unassessed with citations:
 Tier: A0 none · A1 R only · A2 (U or T) · A3 (U and T) · A4 (U+T+R) · A5 (U+T+X).
 If any load-bearing flag is `unassessed`, the tier is provisional — report it
 with the coverage caveat, do not silently floor it.
+
+**R for machine-authored code:** when origin is low (machine wrote most of it),
+a human rarely exercises control by reading the whole diff — they exercise it
+through U and T. So R:NO on high-machine-origin work is the *expected, honest*
+state, not a deficiency, and A3 (U and T) is its natural strong ceiling
+without external review. Do not read R:NO there as a failing; A4 simply
+requires a breadth-review that this way of working does not use.
 
 =========================================================================
 OUTPUT
