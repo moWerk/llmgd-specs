@@ -21,8 +21,8 @@ open, and it records what reliably worked there.
 - **Claim what you actually did.** A human who designed the UX and tested every
   build is the author of the design and the tester of the result, not the
   author of code they have not read.
-- **The scarce resource is the reviewer's attention.** Everything below exists
-  to spend less of it.
+- **The scarce resource is the reviewer's attention** (Ed Beroset). Everything
+  below exists to spend less of it.
 
 ## 1. Before writing: the ecosystem's conventions first
 
@@ -38,14 +38,18 @@ does not know what the experienced people would do differently.
 - Treat "X is not allowed" or "X is impossible" as a lead to verify at the
   source, not as a conclusion.
 - Write code in the idiom of the language and the surrounding code (for
-  example, bindings in QML rather than imperative updates).
+  example, bindings in QML rather than imperative updates). Give one concept
+  one name everywhere, and before adding code, ask what existing code the
+  change could consolidate; the best consolidation is deletion (Ed Beroset).
 
 ## 2. Commits
 
-- **One concern per commit.** A reviewer must be able to accept or reject it
-  as a unit.
+- **One concern per commit** (Ed Beroset). A reviewer must be able to accept
+  or reject it as a unit. Big work goes in small reviewable steps, never as a
+  branch dump.
 - **The message explains itself:** what changed, why, what was checked and how,
-  and **what was not checked**. Name the mistakes made on the way and how they
+  and **what was not checked**; after a structural change, also what did
+  *not* change (Ed Beroset). Name the mistakes made on the way and how they
   were found; they tell the reviewer where to look.
 - **End with an LLMGD line** instead of a co-author trailer. A co-author tag
   confuses involvement with blame; the grade says what kind of involvement.
@@ -163,6 +167,21 @@ A prompt for the session:
     LLMGD lines graded from the transcripts, then the README section and
     review-and-architecture-hints.md as separate commits. Do not push over
     <original>. Report what you could not verify.
+
+## Acknowledgements
+
+The commit, review and code rules marked **(Ed Beroset)** are his. As an
+AsteroidOS co-maintainer, his review comments on the first large LLM-made pull
+requests shaped the instruction sets this guide is distilled from more than
+anything else: one concern per commit, the reviewer's attention as the scarce
+resource, one name per concept, simplify before adding, and edge-case-minded
+tests. Naming him here is deliberate. Frontier models were trained on public
+contributions like his with no way to credit them; a guide for LLM-made work
+should not repeat that.
+
+The lessons in section 1 come from app developer poetaster, whose replies in
+the SailfishOS forum showed that the ported apps needed no compiled code and
+could pass the Jolla Store, two conventions the LLM had missed.
 
 ## Templates
 
