@@ -1,4 +1,4 @@
-# LLMGD Specification v0.2
+# LLMGD Specification v0.3
 
 Large Language Model Governance Disclosure. A standardized, machine-gradeable
 declaration of LLM involvement in published work.
@@ -6,9 +6,13 @@ declaration of LLM involvement in published work.
 The key words MUST, MUST NOT, SHOULD, SHOULD NOT and MAY are to be
 interpreted as described in RFC 2119.
 
-> **v0.2 is the current version.** It supersedes v0.1 but does not invalidate
-> it: a label that cites `v0.1` remains a valid v0.1 label. See §11 for what
-> changed and why. In short — v0.1 gated every grade on *Read*, the cheapest
+> **v0.3 is the current version.** It adds a companion practice guide
+> ([PRACTICE.md](PRACTICE.md), §12) on how to shape a labelled contribution so
+> it can be reviewed. The label grammar and the grading rubric are unchanged
+> from v0.2, so a v0.2 label remains valid and means the same.
+>
+> **v0.2** superseded v0.1 without invalidating it: a label that cites `v0.1`
+> remains a valid v0.1 label. See §11 for what changed and why. In short — v0.1 gated every grade on *Read*, the cheapest
 > assurance signal, which floored the responsible pattern of heavy, well-
 > understood, well-tested LLM use. v0.2 makes the costly signals (Understood,
 > Tested) load-bearing and splits authorship from oversight into two
@@ -154,10 +158,11 @@ half of it never was), while its origin is a distribution.
 
 ```
 Disclosure: LLMGD-<N> · origin <headline> (<plain phrase>)
-LLMGD: v0.2; assurance=A<0-5>; flags=<U,T,R,X|none>; origin=<dist-or-level>; origin_headline=O<0-4>; scope=<parts>; graded-by=<grader>; retrieval=<mode>
+LLMGD: v0.3; assurance=A<0-5>; flags=<U,T,R,X|none>; origin=<dist-or-level>; origin_headline=O<0-4>; scope=<parts>; graded-by=<grader>; retrieval=<mode>
 ```
 
-Example (the a-d-b worked case, §10):
+Example (the a-d-b worked case, §10, graded under v0.2; graded today the
+same line would cite `v0.3`):
 
 ```
 Disclosure: LLMGD-3 · origin O1 (machine-authored, human-understood and device-tested; not yet externally reviewed)
@@ -261,7 +266,15 @@ its first verdict was wrong.
 
 Semantic versioning; labels MUST cite the version they were graded under.
 
-**v0.2 (current).** (a) Assurance inverted: U and T are load-bearing, R is a
+**v0.3 (current).** Adds [PRACTICE.md](PRACTICE.md), a companion on how to
+structure an LLM-made contribution for review (§12). No change to the label
+grammar, the rubric or the grading protocol: v0.2 and v0.3 labels are graded
+identically, and v0.2 labels need no update. The practice was distilled from
+porting eight watch apps to SailfishOS in the open, every commit labelled; a
+forum reply called the approach the right way of doing it, and an app
+developer offered a code review.
+
+**v0.2.** (a) Assurance inverted: U and T are load-bearing, R is a
 minor breadth signal, no longer a gate. (b) Grade split into two coordinates,
 Origin (authorship) · Assurance (oversight); the LLMGD-N number now tracks the
 assurance tier, with origin as a required companion tag. (c) Origin reported as
@@ -277,6 +290,18 @@ this retrieval model were contributed by the field-grading process itself —
 the standard's own subjects improving the standard.
 
 **v0.1 labels remain valid as v0.1.** They cite their version and their
-grammar is unchanged; do not retro-grade them. New grading uses v0.2.
+grammar is unchanged; do not retro-grade them. **v0.2 labels remain valid as
+v0.2.** New grading cites v0.3.
+
+## 12. Practice (companion)
+
+A label is only as useful as the work behind it is checkable.
+[PRACTICE.md](PRACTICE.md) describes how a labelled contribution SHOULD be
+shaped so a reviewer can verify the label quickly: commits that state what was
+not checked, READMEs and releases with honest test lines, a reviewer's entry
+point per repository, and testing without side effects. It is guidance, not a
+grading input: following it does not raise a grade, and not following it does
+not lower one. Its statements of what was not checked are, however, the
+natural place for a grader to find a work's own scoping.
 
 Changes happen by public PR to this repository.

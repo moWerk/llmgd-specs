@@ -35,7 +35,7 @@ The idea sparked while shipping a watch app PR where every design decision
 and every sentence was mine, but the typing was not. Not disclosing that felt
 wrong. Disclosing it as co-authorship felt wrong too. So: a standard.
 
-## The short version (v0.2)
+## The short version (v0.3)
 
 Two axes, because a reader asks two questions.
 
@@ -64,11 +64,18 @@ Add the two lines to your commit, PR or document footer:
 
 ```
 Disclosure: LLMGD-3 · origin O1 (machine-authored, human-understood and device-tested)
-LLMGD: v0.2; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headline=O1; scope=code+messages; graded-by=<model>; retrieval=author-side
+LLMGD: v0.3; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headline=O1; scope=code+messages; graded-by=<model>; retrieval=author-side
 ```
 
 Then, ideally, publish the graded verdict or keep the transcript retrievable
 for third-party grading. That is the whole standard.
+
+The label is only as useful as the work behind it is reviewable.
+[PRACTICE.md](PRACTICE.md) describes how to shape an LLM-made contribution
+so a reviewer can check the label quickly: commits that say what was not
+checked, READMEs and releases with honest test lines, a reviewer's entry
+point per repository, and testing without side effects. Hand it to your
+coding agent along with the spec.
 
 ### Embedding the badges
 
@@ -83,7 +90,7 @@ theme-safe):
 ```html
 <p>
 <a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3.svg" height="30" alt="LLMGD-3"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · machine-authored, human-understood and device-tested<br>
-<sub><code>LLMGD: v0.2; assurance=A3; flags=U,T; origin_headline=O1; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
+<sub><code>LLMGD: v0.3; assurance=A3; flags=U,T; origin_headline=O1; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
 </p>
 ```
 
@@ -129,6 +136,10 @@ The grading prompt and all assets: CC0, so they can be embedded anywhere
 without friction.
 
 ## Status
+
+v0.3 adds [PRACTICE.md](PRACTICE.md), the companion on structuring
+contributions for review; label and rubric are unchanged from v0.2, so v0.2
+labels stay valid as they are.
 
 v0.2 — the first field-grading (a heavily machine-authored but understood-and-
 tested project) exposed v0.1's Read-gate as backwards; v0.2 makes the costly
