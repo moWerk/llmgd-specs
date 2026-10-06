@@ -129,6 +129,41 @@ When the setup works alone (overnight, say):
 - When someone gives a hint (a forum reply, a review), act on it visibly: say
   in the commits and release notes which changes it triggered.
 
+## 10. Applying this to existing work
+
+Work that was made before any of this can be brought into shape afterwards,
+by the same kind of LLM session that made it. The rule that keeps this
+honest: **the history is restructured, the result is not changed.**
+
+1. **Leave the original branch untouched.** Create a new branch from the
+   point where the work started (the fork point, or the last commit before
+   the LLM work).
+2. **Rebuild the history in single-concern commits** on the new branch, each
+   with a message after section 2: what changed, why, what was checked, what
+   was not, and an LLMGD line graded from the evidence in the transcripts.
+   Mistakes found in the old history stay mentioned; they are information for
+   the reviewer.
+3. **Prove equivalence:** `git diff <original-branch> <clean-branch>` must be
+   empty before anything else is added. If it is not, the refactor changed
+   the work and is not done.
+4. **Then add the documentation** in separate commits: the README's "What was
+   checked, and what was not" (section 4) and `review-and-architecture-hints.md`
+   (section 6). Check every claim in them against the code.
+5. **Grade** with [GRADING_PROMPT.md](GRADING_PROMPT.md) over the transcripts
+   that produced the work, and publish the first verdict.
+6. **Hand the clean branch to the human** for review and the merge decision.
+   Nothing is force-pushed over the original.
+
+A prompt for the session:
+
+    Read PRACTICE.md and SPEC.md from https://github.com/moWerk/llmgd-specs.
+    Refactor the work on branch <original> into a reviewable branch <clean>,
+    following PRACTICE.md section 10: same final tree as <original> (prove it
+    with an empty git diff), single-concern commits with honest messages and
+    LLMGD lines graded from the transcripts, then the README section and
+    review-and-architecture-hints.md as separate commits. Do not push over
+    <original>. Report what you could not verify.
+
 ## Templates
 
 Commit message:

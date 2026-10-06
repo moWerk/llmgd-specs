@@ -299,7 +299,8 @@ A label is only as useful as the work behind it is checkable.
 [PRACTICE.md](PRACTICE.md) describes how a labelled contribution SHOULD be
 shaped so a reviewer can verify the label quickly: commits that state what was
 not checked, READMEs and releases with honest test lines, a reviewer's entry
-point per repository, and testing without side effects. It is guidance, not a
+point per repository, testing without side effects, and a procedure for
+refactoring existing work into a reviewable branch with an unchanged result. It is guidance, not a
 grading input: following it does not raise a grade, and not following it does
 not lower one. Its statements of what was not checked are, however, the
 natural place for a grader to find a work's own scoping.
