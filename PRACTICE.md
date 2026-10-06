@@ -37,6 +37,9 @@ does not know what the experienced people would do differently.
   before building.
 - Treat "X is not allowed" or "X is impossible" as a lead to verify at the
   source, not as a conclusion.
+- Before investing in large work, agree on the direction with the people who
+  will review and maintain it (Ed Beroset, see
+  [asteroid-docking-bay#2](https://github.com/moWerk/asteroid-docking-bay/issues/2)).
 - Write code in the idiom of the language and the surrounding code (for
   example, bindings in QML rather than imperative updates). Give one concept
   one name everywhere, and before adding code, ask what existing code the
@@ -170,12 +173,29 @@ A prompt for the session:
 
 ## Acknowledgements
 
-The commit, review and code rules marked **(Ed Beroset)** are his. As an
-AsteroidOS co-maintainer, his review comments on the first large LLM-made pull
-requests shaped the instruction sets this guide is distilled from more than
-anything else: one concern per commit, the reviewer's attention as the scarce
-resource, one name per concept, simplify before adding, and edge-case-minded
-tests. Naming him here is deliberate. Frontier models were trained on public
+The rules marked **(Ed Beroset)** are his. As an AsteroidOS co-maintainer he
+gave the author this advice from the start of his LLM-assisted work, much of
+it directly and in private: one concern per commit, the reviewer's attention
+as the scarce resource, one name per concept, simplify before adding,
+edge-case-minded tests, and no check-in without passing tests. That advice
+shaped the instruction sets this guide is distilled from more than anything
+else. Where it shows publicly:
+
+- his own reviews, for example asking for one concern per pull request in
+  [unofficial-watchfaces#244](https://github.com/AsteroidOS/unofficial-watchfaces/pull/244#pullrequestreview-4678597700),
+  his numbered design and security review in
+  [asteroid-docking-bay#3](https://github.com/moWerk/asteroid-docking-bay/issues/3),
+  and agreeing on the direction before the work in
+  [asteroid-docking-bay#2](https://github.com/moWerk/asteroid-docking-bay/issues/2);
+- the author's commits that apply his rules and name him, for example
+  [eb1639f](https://github.com/moWerk/asteroid-docking-bay/commit/eb1639f)
+  (one name per concept),
+  [99915e6](https://github.com/moWerk/asteroid-docking-bay/commit/99915e6)
+  (tests gate, consolidation) and
+  [0c4024e](https://github.com/moWerk/asteroid-docking-bay/commit/0c4024e)
+  (edge-case tests).
+
+Naming him here is deliberate. Frontier models were trained on public
 contributions like his with no way to credit them; a guide for LLM-made work
 should not repeat that.
 
