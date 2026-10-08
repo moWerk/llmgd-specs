@@ -18,7 +18,7 @@ open, and it records what reliably worked there.
 - **LLM-made work is a prototype until a competent reviewer has checked it** and
   thereby taken ownership of the code. Say so, in the README and in releases
   (for example by publishing them as pre-releases).
-- **Claim what you actually did.** A author who designed the UX and tested every
+- **Claim what you actually did.** Someone who designed the UX and tested every
   build is the author of the design and the tester of the result, not the
   author of code they have not read.
 - **The scarce resource is the reviewer's attention** (Ed Beroset). Everything
