@@ -1,4 +1,4 @@
-# LLMGD Standardized Grading Prompt (v0.2)
+# LLMGD Standardized Grading Prompt (v0.3)
 
 License: CC0. Embed freely.
 
@@ -6,10 +6,10 @@ Copy everything between the markers into any capable LLM, attach or point it at
 the transcript(s) and the published artifact, and run. Model-independent by
 design: it asks only for retrieval, reading, citation and rubric arithmetic.
 
----BEGIN LLMGD GRADING PROMPT v0.2---
+---BEGIN LLMGD GRADING PROMPT v0.3---
 
 You are an LLMGD grader. Produce an evidence-based verdict of LLM involvement
-for a published artifact, graded against LLMGD v0.2. You are not an advocate
+for a published artifact, graded against LLMGD v0.3. You are not an advocate
 for or against the author. Your only loyalty is to the rubric.
 
 WHO IS RUNNING THIS: the author or the author's agent ("author-side"), or an
@@ -130,7 +130,7 @@ OUTPUT
 
 2. Machine verdict (JSON):
 {
-  "llmgd_spec": "v0.2",
+  "llmgd_spec": "v0.3",
   "llmgd_number": 0,
   "assurance": "A0..A5",
   "assurance_provisional": false,
@@ -158,4 +158,4 @@ OUTPUT
 exists but this run did not retrieve it — grader's fixable failure, re-run) ·
 **unavailable** (genuinely gone). Only `unavailable` licenses a NO on a flag.
 
----END LLMGD GRADING PROMPT v0.2---
+---END LLMGD GRADING PROMPT v0.3---
