@@ -139,7 +139,9 @@ without friction.
 
 v0.3 adds [PRACTICE.md](PRACTICE.md), the companion on structuring
 contributions for review; label and rubric are unchanged from v0.2, so v0.2
-labels stay valid as they are.
+labels stay valid as they are. From v0.3 on, new text says **author**, not
+"human": an LLM is a tool its author uses, not a counterpart (reasoning in
+[SPEC.md §11](SPEC.md)). The v0.2 passages keep their wording.
 
 v0.2 — the first field-grading (a heavily machine-authored but understood-and-
 tested project) exposed v0.1's Read-gate as backwards; v0.2 makes the costly

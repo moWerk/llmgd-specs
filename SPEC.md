@@ -274,6 +274,17 @@ porting eight watch apps to SailfishOS in the open, every commit labelled; a
 forum reply called the approach the right way of doing it, and an app
 developer offered a code review.
 
+*Nomenclature, a decision from v0.3 on.* New text calls the person whose
+work it is the **author** (or the **contributor**, where the point is
+contributing to someone else's project), never "the human". Reason:
+"human" sets the LLM up as the person's counterpart, an implicit
+comparison that plays into the marketing story of artificial and super
+intelligence and gets in the way of a sober, conscious use of these
+tools. An LLM is a tool its author uses, and LLMGD grades how that tool
+was used. The passages carried over from v0.2 keep the word "human", so
+as not to rewrite history; read it there as the author. No label field
+changes.
+
 **v0.2.** (a) Assurance inverted: U and T are load-bearing, R is a
 minor breadth signal, no longer a gate. (b) Grade split into two coordinates,
 Origin (authorship) · Assurance (oversight); the LLMGD-N number now tracks the
