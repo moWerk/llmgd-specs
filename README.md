@@ -131,14 +131,17 @@ interest and flags its own conflict of interest.
 
 ## Credits
 
-Most of the review rules in [PRACTICE.md](PRACTICE.md) go back to **Ed Beroset**,
-AsteroidOS co-maintainer, who guided the author through his AsteroidOS
-contributions and the asteroid-docking-bay project: one concern per commit, the
-reviewer's attention as the scarce resource, saying what did *not* change, one
-name per concept, simplifying before adding, edge-case-minded tests, no check-in
-without passing tests, and agreeing on the direction before large work. Much of
-it was given directly; where it shows publicly: his reviews in
-[unofficial-watchfaces#244](https://github.com/AsteroidOS/unofficial-watchfaces/pull/244#pullrequestreview-4678597700),
+LLMGD and its practice guide were inspired by the direct involvement of two
+people in the author's contributions.
+
+**Ed Beroset**, AsteroidOS co-maintainer, guided the author through his
+AsteroidOS contributions and the asteroid-docking-bay project. Most of the
+review rules in [PRACTICE.md](PRACTICE.md) go back to that guidance: one concern
+per commit, the reviewer's attention as the scarce resource, saying what did
+*not* change, one name per concept, simplifying before adding, edge-case-minded
+tests, no check-in without passing tests, and agreeing on the direction before
+large work. Much of it was given directly; where it shows publicly: his reviews
+in [unofficial-watchfaces#244](https://github.com/AsteroidOS/unofficial-watchfaces/pull/244#pullrequestreview-4678597700),
 [asteroid-docking-bay#2](https://github.com/moWerk/asteroid-docking-bay/issues/2) and
 [#3](https://github.com/moWerk/asteroid-docking-bay/issues/3), and the author's commits
 that apply his rules
@@ -148,10 +151,10 @@ that apply his rules
 Naming him is deliberate: frontier models were trained on public contributions
 like his with no way to credit them.
 
-The ecosystem lessons in PRACTICE §1 come from app developer **poetaster**,
-whose replies in the [SailfishOS forum](https://forum.sailfishos.org/t/34561)
-showed that the ported apps needed no compiled code and could pass the Jolla
-Store, two conventions the LLM had missed.
+**poetaster**, SailfishOS app developer, answered the author's SailfishOS ports
+in the [forum](https://forum.sailfishos.org/t/34561) with the hints that the apps
+needed no compiled code and could pass the Jolla Store, two conventions the LLM
+had missed. The ecosystem lessons in PRACTICE §1 come from that.
 
 ## Licensing
 
