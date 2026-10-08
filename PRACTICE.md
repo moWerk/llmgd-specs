@@ -4,11 +4,11 @@ Part of LLMGD v0.3: a companion to the [specification](SPEC.md) (§12). It is
 guidance, not a grading input.
 
 LLMGD says how much
-machine work is in a contribution and how well its contributor governed it. This
+machine work is in a contribution and how well its author governed it. This
 document says how to shape the contribution so that a reviewer can check that
 label quickly, and so that the work earns trust instead of asking for it.
 
-It is written for the LLM setup as much as for the contributor using it: paste it into the
+It is written for the LLM setup as much as for the author using it: paste it into the
 instructions of a coding agent, or follow it by hand. It grew out of porting
 eight AsteroidOS watch apps to SailfishOS with an LLM in October 2026, in the
 open, and it records what reliably worked there.
@@ -18,7 +18,7 @@ open, and it records what reliably worked there.
 - **LLM-made work is a prototype until a competent reviewer has checked it** and
   thereby taken ownership of the code. Say so, in the README and in releases
   (for example by publishing them as pre-releases).
-- **Claim what you actually did.** A contributor who designed the UX and tested every
+- **Claim what you actually did.** A author who designed the UX and tested every
   build is the author of the design and the tester of the result, not the
   author of code they have not read.
 - **The scarce resource is the reviewer's attention** (Ed Beroset). Everything
@@ -27,13 +27,13 @@ open, and it records what reliably worked there.
 ## 1. Before writing: the ecosystem's conventions first
 
 The most common failure of a newcomer with an LLM is not bad code but missing
-ecosystem knowledge: the LLM follows the prompt literally, and the contributor
+ecosystem knowledge: the LLM follows the prompt literally, and the author
 does not know what the experienced people would do differently.
 
 - Before packaging, permission, architecture or API choices, find out what
   established projects in that ecosystem do. Look at the platform's own apps
   on a real device, at the build tooling's own files, at well-known community
-  apps. If the contributor's instruction conflicts with the convention, say so
+  apps. If the author's instruction conflicts with the convention, say so
   before building.
 - Treat "X is not allowed" or "X is impossible" as a lead to verify at the
   source, not as a conclusion.
@@ -62,7 +62,7 @@ does not know what the experienced people would do differently.
 ## 3. Epistemic labels
 
 Every factual claim the setup makes, in commits, READMEs and replies to its
-contributor, carries its basis:
+author, carries its basis:
 
 - **confirmed**: observed in this session (a log line, a measurement, a file
   read on the device);
@@ -107,7 +107,7 @@ Each repository gets a short `review-and-architecture-hints.md`:
 Forty to sixty lines are enough. Check every claim in it against the code
 before publishing it.
 
-## 7. Testing while the contributor is away
+## 7. Testing while the author is away
 
 When the setup works alone (overnight, say):
 
@@ -115,24 +115,24 @@ When the setup works alone (overnight, say):
   the result (feed a file instead of a microphone, run the add/remove path of
   a store, log the camera's state), so behaviour can be checked without
   touching the screen.
-- **No side effects the contributor would notice**: no sound, no lit screens at
+- **No side effects the author would notice**: no sound, no lit screens at
   night, no settings left changed. Save and restore any state a test changes
   (brightness, test modes).
 - Put whatever could not be checked this way on the "not checked" list for
-  the contributor's morning.
+  the author's morning.
 
 ## 8. Long sessions
 
 - Keep **rolling records**: a state file (what is true now), a dated session
   log (what happened), a plan file for unattended runs, and a morning report
-  that leads with what needs the contributor's eyes.
+  that leads with what needs the author's eyes.
 - Record durable lessons where the next session will read them, and correct
   them when they turn out wrong.
 
 ## 9. Talking to people
 
-- **Replies to people are the contributor's own.** The LLM drafts posts in the
-  contributor's voice, marked as drafts; the contributor edits and posts.
+- **Replies to people are the author's own.** The LLM drafts posts in the
+  author's voice, marked as drafts; the author edits and posts.
 - When someone gives a hint (a forum reply, a review), act on it visibly: say
   in the commits and release notes which changes it triggered.
 
@@ -158,7 +158,7 @@ honest: **the history is restructured, the result is not changed.**
    (section 6). Check every claim in them against the code.
 5. **Grade** with [GRADING_PROMPT.md](GRADING_PROMPT.md) over the transcripts
    that produced the work, and publish the first verdict.
-6. **Hand the clean branch to the contributor** for review and the merge decision.
+6. **Hand the clean branch to the author** for review and the merge decision.
    Nothing is force-pushed over the original.
 
 A prompt for the session:
