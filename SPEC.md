@@ -22,13 +22,13 @@ interpreted as described in RFC 2119.
 
 1. **Consumer-driven.** The label answers the questions its readers have.
    Reviewers and future maintainers ask two *different* questions: "how much
-   of this did a machine author?" (provenance) and "how well did a human
+   of this did a machine author?" (provenance) and "how well did the author
    govern it?" (trust). v0.2 answers both, separately.
 2. **Decisions, not keystrokes.** Authorship is graded on who made the
    decisions the bytes express, not who typed them.
-3. **Costly signals lead.** A human *demonstrating* understanding (catching an
+3. **Costly signals lead.** An author *demonstrating* understanding (catching an
    error, reversing a design) or *testing* against reality is strong evidence.
-   A human *saying* "I read it" is cheap. The grade must weight the costly
+   An author *saying* "I read it" is cheap. The grade must weight the costly
    signals above the cheap ones — including in how the tiers are built.
 4. **Evidence or it did not happen.** Every level is defined by observable
    events in the interaction transcript(s). Unprovable claims grade DOWN.
@@ -42,17 +42,17 @@ behaviour, wording.
 
 | Level | Definition |
 |---|---|
-| **O0** | Machine decided and expressed. Human supplied goals or bare prompts only. |
-| **O1** | Human set constraints, specifications or corrective direction. Machine designed the details and expressed them. |
-| **O2** | Human designed. Machine purely expressed (typing, formatting, translation into artifact form). |
-| **O3** | Human designed and expressed. Machine edited, restructured, polished or rescoped existing human material. |
+| **O0** | Machine decided and expressed. The author supplied goals or bare prompts only. |
+| **O1** | The author set constraints, specifications or corrective direction. Machine designed the details and expressed them. |
+| **O2** | The author designed. Machine purely expressed (typing, formatting, translation into artifact form). |
+| **O3** | The author designed and expressed. Machine edited, restructured, polished or rescoped the author's existing material. |
 | **O4** | No LLM involvement. |
 
 **Composite works MUST report a distribution, not just the weakest part.**
 A real unit (a PR, a release) spans levels: some commits O2, some O0. Report
 the mass fraction at each level plus a headline. The headline SHOULD be the
 mass-weighted characterization, not the floor — collapsing a work that is half
-O2 to a bare "O0" discards the signal that half of it was human-designed.
+O2 to a bare "O0" discards the signal that half of it was author-designed.
 
 ```
 origin: {O0: 0.30, O1: 0.20, O2: 0.50}; origin_headline: O1
@@ -61,7 +61,7 @@ origin: {O0: 0.30, O1: 0.20, O2: 0.50}; origin_headline: O1
 Atomic works may report a single level: `origin: O2`.
 
 **O0-vs-O1 boundary test.** This boundary now carries the judgment weight, so
-apply a fixed test: does the human utterance *name the design* (→ O1, or O2 if
+apply a fixed test: does the author's utterance *name the design* (→ O1, or O2 if
 it also specifies the expression) or *feed a decision the machine then makes*
 (→ O0)? "Shift it to the service", a dictated command set, "commit scoped by
 theme" name the design. "It crashes", "the VAI doesn't cut power", "implement
@@ -72,17 +72,17 @@ coin-flip as settled.
 
 ## 3. Axis two — ASSURANCE (oversight): A0–A5
 
-Assurance grades how strongly a human governed the work before publication.
+Assurance grades how strongly the author governed the work before publication.
 This is the trust axis and the primary driver of the LLMGD number (§5).
 
 **The underlying evidence types (flags):**
 
 | Flag | Name | Weight | Evidence required |
 |---|---|---|---|
-| **U** | Understood | **costly, load-bearing** | Demonstrated comprehension: the human corrected errors, reversed designs, caught inconsistencies, ran experiments that required understanding. NOT "I understand this" (cheap talk). |
-| **T** | Tested | **costly, load-bearing** | Empirically exercised: builds, device runs, CI, reproductions, planted-bug validation, with results fed back. Mark `observed` (results in transcript) or `attested` (human-reported). |
+| **U** | Understood | **costly, load-bearing** | Demonstrated comprehension: the author corrected errors, reversed designs, caught inconsistencies, ran experiments that required understanding. NOT "I understand this" (cheap talk). |
+| **T** | Tested | **costly, load-bearing** | Empirically exercised: builds, device runs, CI, reproductions, planted-bug validation, with results fed back. Mark `observed` (results in transcript) or `attested` (author-reported). |
 | **R** | Read | breadth, minor | The complete artifact (or full diff) was seen before publication. Coverage, not depth: proves breadth ("saw all of it"), not comprehension. |
-| **X** | eXternally reviewed | external | An independent human reviewed it. Normally accrues AFTER publication; a shipped label MUST NOT self-claim X. |
+| **X** | eXternally reviewed | external | Someone other than the author reviewed it. Normally accrues AFTER publication; a shipped label MUST NOT self-claim X. |
 
 **Key change from v0.1:** U and T are load-bearing; R is a minor breadth
 signal and is NOT a prerequisite for the higher tiers. Demonstrated
@@ -106,7 +106,7 @@ A3 — heavily machine-authored but genuinely understood and tested — is the
 responsible heavy-LLM-use state, and it is a *respectable* grade. v0.1 could
 not represent it; v0.2 makes it central.
 
-**R for machine-authored code.** When origin is low, a human rarely governs by
+**R for machine-authored code.** When origin is low, an author rarely governs by
 reading the whole diff — reading 40k machine-written lines is not how a
 maintainer of such work exercises control; U and T are. So `R: NO` on
 high-machine-origin work is the *expected, honest* state, not a deficiency, and
@@ -124,7 +124,7 @@ Graders MUST weight evidence by class:
 - **Cheap talk (weak).** "I fully understand this" / "looks good" carry near-
   zero weight alone.
 - **Observed vs attested.** Machine-visible events (a test log in the
-  transcript) are `observed`. Human reports of off-transcript events ("it runs
+  transcript) are `observed`. The author's reports of off-transcript events ("it runs
   green on my watch") are `attested`. Both count; the verdict MUST state which.
 
 ## 5. The grade: a coordinate pair, plus a summary number
@@ -134,7 +134,7 @@ together. Example: `O1·A3` = "mostly machine-authored, understood and tested,
 not externally reviewed."
 
 The memorable **LLMGD-N number equals the assurance tier N** (A0→LLMGD-0 …
-A5→LLMGD-5). The number is the *governance* level — the "how well did a human
+A5→LLMGD-5). The number is the *governance* level — the "how well did the author
 keep this above the slop-line" reading — which is what a consumer deciding
 whether to trust the work actually needs. Origin travels *with* the number as
 a required companion, never folded into it.
@@ -165,7 +165,7 @@ Example (the a-d-b worked case, §10, graded under v0.2; graded today the
 same line would cite `v0.3`):
 
 ```
-Disclosure: LLMGD-3 · origin O1 (machine-authored, human-understood and device-tested; not yet externally reviewed)
+Disclosure: LLMGD-3 · origin O1 (machine-authored, author-understood and device-tested; not yet externally reviewed)
 LLMGD: v0.2; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headline=O1; scope=code+docs; graded-by=claude-opus-4-8; retrieval=author-side
 ```
 
@@ -253,7 +253,7 @@ A long, heavily machine-authored software project (a fleet manager, releases
   planted-bug validation, including a self-caught decoration failure). R is now
   a *searched* NO: across 4,363 turns only 7 touch code at all, and the 44
   `git diff` runs were the assistant's own grep-filtered verification, never a
-  diff shown to the human — the expected, honest state for machine-authored
+  diff shown to the author — the expected, honest state for machine-authored
   code, and A3 is its natural ceiling. Origin is a near-even distribution
   `{O0:.45, O1:.45, O2:.10}`, headline O1, with the boundary sensitivity
   reported rather than hidden.
@@ -274,16 +274,17 @@ porting eight watch apps to SailfishOS in the open, every commit labelled; a
 forum reply called the approach the right way of doing it, and an app
 developer offered a code review.
 
-*Nomenclature, a decision from v0.3 on.* New text calls the person whose
-work it is the **author** (or the **contributor**, where the point is
+*Nomenclature, a decision from v0.3 on.* The specification calls the person
+whose work it is the **author** (or the **contributor**, where the point is
 contributing to someone else's project), never "the human". Reason:
 "human" sets the LLM up as the person's counterpart, an implicit
 comparison that plays into the marketing story of artificial and super
 intelligence and gets in the way of a sober, conscious use of these
 tools. An LLM is a tool its author uses, and LLMGD grades how that tool
-was used. The passages carried over from v0.2 keep the word "human", so
-as not to rewrite history; read it there as the author. No label field
-changes.
+was used. Applied throughout, including the passages carried over from
+v0.2: those kept the old word at first, and needing a sentence to explain
+why they differed was the argument for changing them. No label field
+changes, no grade changes.
 
 **v0.2.** (a) Assurance inverted: U and T are load-bearing, R is a
 minor breadth signal, no longer a gate. (b) Grade split into two coordinates,

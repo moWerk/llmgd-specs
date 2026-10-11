@@ -5,20 +5,20 @@
 A Creative-Commons-style label that says, honestly and verifiably, how much
 LLM involvement a piece of work contains.
 
-**Origin** — the authorship split, from all-machine to all-human:
+**Origin** — the authorship split, from all-machine to all-author:
 
 <p>
 <img src="assets/llmgd-signal-o0.svg" height="40" alt="O0 all machine">
 <img src="assets/llmgd-signal-o1.svg" height="40" alt="O1 mostly machine">
 <img src="assets/llmgd-signal-o2.svg" height="40" alt="O2 half and half">
-<img src="assets/llmgd-signal-o3.svg" height="40" alt="O3 mostly human">
-<img src="assets/llmgd-signal-o4.svg" height="40" alt="O4 all human">
+<img src="assets/llmgd-signal-o3.svg" height="40" alt="O3 mostly author">
+<img src="assets/llmgd-signal-o4.svg" height="40" alt="O4 all author">
 </p>
 
-The mark reads itself: a smooth **analog wave** is the human side, a stepped
+The mark reads itself: a smooth **analog wave** is the author's side, a stepped
 **digital wave** is the machine, and the split sits at the authorship
 proportion. The **LLMGD-N** number is the second axis — the assurance tier,
-how well a human governed the work.
+how well the author governed the work.
 
 ## Why
 
@@ -45,7 +45,7 @@ Two axes, because a reader asks two questions.
   machine-expressed, **O3** author-written and machine-edited, **O4** untouched
   by any model. Composite works report a **distribution** across these levels,
   not just the weakest part.
-- **Assurance (A0–A5)** — *how well a human governed it.* Built from evidence
+- **Assurance (A0–A5)** — *how well the author governed it.* Built from evidence
   flags where the **costly** ones lead: **U**nderstood (demonstrated by
   correcting/steering) and **T**ested (empirically) are load-bearing;
   **R**ead is a minor breadth signal, not a gate; **X** is external review.
@@ -66,7 +66,7 @@ Read-gate: [SPEC.md](SPEC.md).
 Add the two lines to your commit, PR or document footer:
 
 ```
-Disclosure: LLMGD-3 · origin O1 (machine-authored, human-understood and device-tested)
+Disclosure: LLMGD-3 · origin O1 (machine-authored, author-understood and device-tested)
 LLMGD: v0.3; assurance=A3; flags=U,T; origin={O0:.4,O1:.3,O2:.3}; origin_headline=O1; scope=code+messages; graded-by=<model>; retrieval=author-side
 ```
 
@@ -85,14 +85,14 @@ coding agent along with the spec.
 For a nicer label, embed the badge assets instead of plain text. The
 reusable two-line pattern: line one carries the **assurance-tier lockup**
 (linking to this spec) and the **origin mark** for your split, plus the
-human phrase; line two is the machine-readable string. The lockup uses a
+plain phrase; line two is the machine-readable string. The lockup uses a
 picture element so both GitHub themes render it (the `-dark` variants carry
 light text for dark backgrounds; the origin marks are colour-only and
 theme-safe):
 
 ```html
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3.svg" height="30" alt="LLMGD-3"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · machine-authored, human-understood and device-tested<br>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-3.svg" height="30" alt="LLMGD-3"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · machine-authored, author-understood and device-tested<br>
 <sub><code>LLMGD: v0.3; assurance=A3; flags=U,T; origin_headline=O1; scope=code+messages+docs; graded-by=&lt;model&gt;; retrieval=author-side</code></sub>
 </p>
 ```
@@ -104,8 +104,8 @@ machine-readable line always carries the exact coordinates.
 Rendered, this repository's own label:
 
 <p>
-<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2.svg" height="30" alt="LLMGD-2"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · human concept and rulings, LLM-designed detail and text; understood, read<br>
-<sub><code>LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs+assets; graded-by=claude-fable-5; retrieval=author-side</code></sub>
+<a href="https://github.com/moWerk/llmgd-specs"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2-dark.svg"><img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-lockup-2.svg" height="30" alt="LLMGD-2"></picture></a>&ensp;<img src="https://raw.githubusercontent.com/moWerk/llmgd-specs/main/assets/llmgd-signal-o1.svg" height="26" alt="origin O1">&ensp;origin O1 · author's concept and rulings, LLM-designed detail and text; understood, read<br>
+<sub><code>LLMGD: v0.3; assurance=A2; flags=U,R; origin_headline=O1; scope=docs+assets; graded-by=claude-opus-5; retrieval=author-side</code></sub>
 </p>
 
 ## This repository's own label
@@ -114,8 +114,8 @@ Dogfood starts at home (A2 = understood, read; not empirically tested — it's a
 spec):
 
 ```
-Disclosure: LLMGD-2 · origin O1 (human concept and rulings, LLM-designed detail and text; understood, read)
-LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs; graded-by=claude-fable-5; retrieval=author-side
+Disclosure: LLMGD-2 · origin O1 (author's concept and rulings, LLM-designed detail and text; understood, read)
+LLMGD: v0.3; assurance=A2; flags=U,R; origin_headline=O1; scope=docs; graded-by=claude-opus-5; retrieval=author-side
 ```
 
 ## Assets
@@ -123,7 +123,7 @@ LLMGD: v0.2; assurance=A2; flags=U,R; origin_headline=O1; scope=docs; graded-by=
 The **signal** badge family in [assets/](assets/) is CC0: origin marks
 `signal-o0…o4` (the analog↔digital authorship split), assurance-tier
 lockups `signal-lockup-0…5`, and the wordmark, each with dark and pure
-black/white variants. The analog wave is the human hand, the square wave
+black/white variants. The analog wave is the author's hand, the square wave
 the machine; the split shows the proportion.
 
 For a worked verdict — the case that shaped v0.2 — see [SPEC.md §10](SPEC.md).
@@ -169,9 +169,9 @@ without friction.
 
 v0.3 adds [PRACTICE.md](PRACTICE.md), the companion on structuring
 contributions for review; label and rubric are unchanged from v0.2, so v0.2
-labels stay valid as they are. From v0.3 on, new text says **author**, not
-"human": an LLM is a tool its author uses, not a counterpart (reasoning in
-[SPEC.md §11](SPEC.md)). The v0.2 passages keep their wording.
+labels stay valid as they are. From v0.3 on the specification says **author**,
+not "human", throughout: an LLM is a tool its author uses, not a counterpart
+(reasoning in [SPEC.md §11](SPEC.md)).
 
 v0.2 — the first field-grading (a heavily machine-authored but understood-and-
 tested project) exposed v0.1's Read-gate as backwards; v0.2 makes the costly

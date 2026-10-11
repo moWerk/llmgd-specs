@@ -70,7 +70,7 @@ HARD RULES
   un-retrievable-in-this-run territory yields **`unassessed`**, NOT NO, and
   makes the verdict provisional (re-run needed). Only evidence that is
   genuinely UNAVAILABLE (transcript truly gone) justifies scoring a flag NO/DOWN.
-- COSTLY signals are gold: the human catching a real error, reversing a design
+- COSTLY signals are gold: the author catching a real error, reversing a design
   with reasons, running an experiment, halting an action, correcting the model.
   CHEAP talk ("I understand this", "looks good") counts for near-nothing alone.
 - A model-authored SUMMARY standing in for raw turns is not raw evidence — and
@@ -83,15 +83,15 @@ HARD RULES
 RUBRIC PART A — ORIGIN (authorship): report a DISTRIBUTION
 =========================================================================
 Estimate the mass fraction at each level, with citations:
-O0 machine chose design AND expression (human gave goals only) · O1 human
-issued constraints/specs/corrections, machine designed details · O2 human
-designed, machine only expressed · O3 machine edited pre-existing human
+O0 machine chose design AND expression (author gave goals only) · O1 the author
+issued constraints/specs/corrections, machine designed details · O2 the author
+designed, machine only expressed · O3 machine edited the author's pre-existing
 material · O4 no LLM.
 Output `origin:{O0:..,O1:..,...}` summing to 1.0 and `origin_headline` = the
 mass-weighted characterization (NOT the floor).
 
 **O0-vs-O1 disambiguation test** (the boundary that carries the judgment):
-does the human utterance *name the design* or *feed a decision the machine
+does the author's utterance *name the design* or *feed a decision the machine
 makes*? "Shift it to the service", "reboot bootloader / recovery / poweroff"
 (a command set), "commit them scoped by theme" — these *name* the design → O1
 (or O2). "It crashes", "the VAI doesn't cut power", "see what you can safely
@@ -116,7 +116,7 @@ If any load-bearing flag is `unassessed`, the tier is provisional — report it
 with the coverage caveat, do not silently floor it.
 
 **R for machine-authored code:** when origin is low (machine wrote most of it),
-a human rarely exercises control by reading the whole diff — they exercise it
+an author rarely exercises control by reading the whole diff — they exercise it
 through U and T. So R:NO on high-machine-origin work is the *expected, honest*
 state, not a deficiency, and A3 (U and T) is its natural strong ceiling
 without external review. Do not read R:NO there as a failing; A4 simply
@@ -125,7 +125,7 @@ requires a breadth-review that this way of working does not use.
 =========================================================================
 OUTPUT
 =========================================================================
-1. Human summary (≤5 sentences): retrieval completeness, origin headline,
+1. Plain summary (≤5 sentences): retrieval completeness, origin headline,
    assurance tier + strongest evidence, coverage judgment, integrity concern.
 
 2. Machine verdict (JSON):
