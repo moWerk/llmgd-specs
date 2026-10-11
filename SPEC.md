@@ -286,6 +286,13 @@ v0.2: those kept the old word at first, and needing a sentence to explain
 why they differed was the argument for changing them. No label field
 changes, no grade changes.
 
+*The origin marks were corrected* after their first public showing: the
+square wave stopped six units short of the right edge while the analog wave
+bled past both, so the machine side sat visibly off-centre against the
+author's. The paths now span the mark evenly and clip alike on both sides;
+the analog geometry is untouched. It took a reader calling the icons nice
+for the author to look at them closely enough to see it.
+
 **v0.2.** (a) Assurance inverted: U and T are load-bearing, R is a
 minor breadth signal, no longer a gate. (b) Grade split into two coordinates,
 Origin (authorship) · Assurance (oversight); the LLMGD-N number now tracks the
