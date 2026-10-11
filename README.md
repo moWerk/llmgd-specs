@@ -39,9 +39,12 @@ wrong. Disclosing it as co-authorship felt wrong too. So: a standard.
 
 Two axes, because a reader asks two questions.
 
-- **Origin (O0–O4)** — *who authored it.* O0 machine-decided from bare
-  prompts, O2 human-designed and machine-expressed, O4 untouched by any model.
-  Composite works report a **distribution**, not just the weakest part.
+- **Origin (O0–O4)** — *who authored it,* from all-machine to all-author:
+  **O0** machine-decided from bare prompts, **O1** machine-designed within the
+  author's constraints and corrections, **O2** author-designed and
+  machine-expressed, **O3** author-written and machine-edited, **O4** untouched
+  by any model. Composite works report a **distribution** across these levels,
+  not just the weakest part.
 - **Assurance (A0–A5)** — *how well a human governed it.* Built from evidence
   flags where the **costly** ones lead: **U**nderstood (demonstrated by
   correcting/steering) and **T**ested (empirically) are load-bearing;
